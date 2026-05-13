@@ -1,8 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from typing import List, Dict, Any
+import os
 
 app = FastAPI(title="HR Expenses API")
+
+# Path to the root directory
+BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+@app.get("/")
+async def read_index():
+    return FileResponse(os.path.join(BASE_PATH, 'index.html'))
+
+@app.get("/style.css")
+async def read_css():
+    return FileResponse(os.path.join(BASE_PATH, 'style.css'))
+
 
 # Allow CORS so the local HTML file can fetch from this API
 app.add_middleware(
