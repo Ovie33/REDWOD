@@ -13,6 +13,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/api")
+def read_root():
+    return {"message": "HR Expenses API is running"}
+
 @app.get("/api/recent-expenses")
 def get_recent_expenses() -> List[Dict[str, Any]]:
     """
